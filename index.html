@@ -539,6 +539,7 @@
             overflow: hidden;
             position: relative;
             box-shadow: var(--shadow);
+            cursor: pointer;
         }
 
         .gallery-item img {
@@ -917,6 +918,105 @@
                 padding: 30px 20px;
             }
         }
+        
+        /* Modal Zoom Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+        }
+        
+        /* Navigation in Modal */
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.3s;
+            user-select: none;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .prev {
+            left: 20px;
+        }
+        
+        .next {
+            right: 20px;
+        }
+        
+        .prev:hover, .next:hover {
+            background-color: var(--primary);
+        }
+        
+        /* Gallery Item Fix */
+        .gallery-item img {
+            display: block;
+        }
     </style>
 </head>
 
@@ -973,7 +1073,7 @@
                     </div>
                 </div>
                 <div class="about-text">
-                    <h3>PMR WIRA UNIT 001 SMAN 4 MAROS</h3>
+                    <h3>Palang Merah Remaja Wira Bhakti</h3>
                     <p>Palang Merah Remaja (PMR) adalah wadah pembinaan generasi muda yang berada di bawah naungan
                         Palang Merah
                         Indonesia (PMI). Organisasi ini bertujuan menanamkan nilai-nilai
@@ -1002,10 +1102,10 @@
     <!-- History Section -->
     <section class="history" id="history">
         <div class="container">
-            <h2 class="section-title">Sejarah PMR WIRA UNIT 001 SMAN 4 MAROS</h2>
+            <h2 class="section-title">Sejarah PMR Wira Bhakti</h2>
             <div class="history-content">
                 <div class="history-text">
-                    <h3>Perjalanan Kami Sejak 2001</h3>
+                    <h3>Perjalanan Kami Sejak 2005</h3>
                     <p>PMR SMA Negeri 4 Maros, yang dikenal dengan nama PMR Smabant, berawal dari adanya permintaan
                         khusus dari
                         PMI
@@ -1043,10 +1143,7 @@
                     </div>
                 </div>
                 <div class="history-image">
-                    <div
-                        style="background: linear-gradient(45deg, var(--dark), var(--primary)); height: 100%; display: flex; align-items: center; justify-content: center;"><img src="Foto Aksara IV.jpeg" alt="Aksara-IV">
-                        <i class="fas fa-history" style="font-size: 10rem; color: rgba(255,255,255,0.2);"></i>
-                    </div>
+                    <img src="Foto Aksara IV.jpeg" alt="Aksara-IV">
                     <div class="history-image-content">
                         <h3>Foto Aksara IV</h3>
                         <p>Foto Bersama Peserta Aksara IV</p>
@@ -1131,40 +1228,37 @@
             <h2 class="section-title">Galeri Kegiatan</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--primary), var(--dark)); height: 100%; bottom: 20px;"><img src="PMR-PEDULI-LINGKUNGAN.jpg" alt="PMR-PEDULI-LINGKUNGAN"></div>
+                    <img src="PMR-PEDULI-LINGKUNGAN.jpg" alt="PMR-PEDULI-LINGKUNGAN" data-caption="PMR Peduli Lingkungan">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--dark-light), var(--accent)); height: 100%;">
-                    <img src="Keslap.jpeg" alt="Kesehatan-Lapangan"></div>
+                    <img src="Keslap.jpeg" alt="Kesehatan-Lapangan" data-caption="Kesehatan Lapangan">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--accent), var(--primary)); height: 100%;"><img src="Keluarga Besar PMR.jpeg" alt="FOTO-BERSAMA"></div>
+                    <img src="Keluarga Besar PMR.jpeg" alt="FOTO-BERSAMA" data-caption="Keluarga Besar PMR">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--dark), var(--primary-dark)); height: 100%;"><img src="HUT PMR.jpeg" alt="HUT-PMR">
-                    </div>
+                    <img src="HUT PMR.jpeg" alt="HUT-PMR" data-caption="HUT PMR">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--primary), var(--dark-light)); height: 100%;"><img src="Pembenahan Tanaman Hidroponik.jpeg" alt="PEMBENAHAN-HIDROPONIK">
-                    </div>
+                    <img src="Pembenahan Tanaman Hidroponik.jpeg" alt="PEMBENAHAN-HIDROPONIK" data-caption="Pembenahan Tanaman Hidroponik">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <div style="background: linear-gradient(45deg, var(--accent), var(--dark)); height: 100%;"><img src="Buka Bersama.jpeg" alt="BUKA-PUASA-BERSAMA"></div>
+                    <img src="Buka Bersama.jpeg" alt="BUKA-PUASA-BERSAMA" data-caption="Buka Puasa Bersama">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                     </div>
@@ -1172,6 +1266,17 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal for Image Zoom -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+        <div class="modal-content">
+            <img class="modal-image" id="zoomedImage">
+            <div class="caption" id="modalCaption"></div>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
@@ -1370,6 +1475,100 @@
         window.addEventListener('scroll', animateOnScroll);
         // Trigger once on load
         window.addEventListener('load', animateOnScroll);
+        
+        // Image Gallery Zoom Functionality
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('zoomedImage');
+        const captionText = document.getElementById('modalCaption');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        
+        // Get all gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentIndex = 0;
+        
+        // Open modal with clicked image
+        galleryItems.forEach((item, index) => {
+            const img = item.querySelector('img');
+            const overlayIcon = item.querySelector('.gallery-overlay i');
+            
+            // Click on image
+            img.addEventListener('click', () => {
+                openModal(index);
+            });
+            
+            // Click on zoom icon
+            overlayIcon.addEventListener('click', () => {
+                openModal(index);
+            });
+        });
+        
+        function openModal(index) {
+            currentIndex = index;
+            const imgSrc = galleryItems[index].querySelector('img').src;
+            const imgAlt = galleryItems[index].querySelector('img').alt;
+            const imgCaption = galleryItems[index].querySelector('img').getAttribute('data-caption') || imgAlt;
+            
+            modal.style.display = 'block';
+            modalImg.src = imgSrc;
+            captionText.innerHTML = imgCaption;
+            
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close modal
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside of image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Navigation between images
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateModalImage();
+        });
+        
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            updateModalImage();
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'block') {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateModalImage();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    updateModalImage();
+                } else if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+        
+        function updateModalImage() {
+            const imgSrc = galleryItems[currentIndex].querySelector('img').src;
+            const imgAlt = galleryItems[currentIndex].querySelector('img').alt;
+            const imgCaption = galleryItems[currentIndex].querySelector('img').getAttribute('data-caption') || imgAlt;
+            
+            modalImg.src = imgSrc;
+            captionText.innerHTML = imgCaption;
+        }
     </script>
 </body>
 
